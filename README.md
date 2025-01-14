@@ -13,6 +13,8 @@ Bienvenue dans **Quiz Game**, un jeu de questions inspiré de "Questions pour un
 
 Caractéristiques :
 - Plusieurs catégories de questions (histoire, science, géographie, culture générale, etc.).
+- Menu interactif pour choisir une catégorie avant de commencer le quiz.
+- Questions organisées par catégorie pour une expérience personnalisée.
 - Système de score pour suivre vos progrès.
 - Facile à personnaliser : ajoutez vos propres questions et réponses !
 
