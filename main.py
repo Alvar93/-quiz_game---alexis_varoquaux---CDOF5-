@@ -52,9 +52,29 @@ def ask_question(question_data):
 
     return question_data["options"][choice - 1] == question_data["answer"]
 
+def save_score(player_name, category, score, total):
+    """Enregistre le score du joueur dans un fichier scores.txt."""
+    with open("scores.txt", "a") as file:
+        file.write(f"{player_name},{category},{score}/{total}\n")
+
+def display_top_scores():
+    """Affiche les meilleurs scores enregistrés."""
+    try:
+        with open("scores.txt", "r") as file:
+            scores = file.readlines()
+            scores = [line.strip().split(",") for line in scores]
+            scores = sorted(scores, key=lambda x: int(x[2].split("/")[0]), reverse=True)
+            
+            print("\n🏆 Meilleurs scores :")
+            for rank, score in enumerate(scores[:5], start=1):
+                print(f"{rank}. {score[0]} - {score[1]} - {score[2]}")
+    except FileNotFoundError:
+        print("\nAucun score enregistré pour le moment.")
+
 def main():
     """Exécute le jeu de quiz."""
     print("Bienvenue dans le quiz de culture générale !\n")
+    player_name = input("Entrez votre nom : ").strip()
     questions = load_questions()
     categories = list(questions.keys())
 
@@ -75,6 +95,12 @@ def main():
             print(f"Faux ! La bonne réponse était : {question_data['answer']}.")
 
     print(f"\nQuiz terminé ! Votre score final est : {score}/{len(selected_questions)}")
+
+    # Sauvegarder le score
+    save_score(player_name, selected_category, score, len(selected_questions))
+
+    # Afficher les meilleurs scores
+    display_top_scores()
 
 if __name__ == "__main__":
     main()
