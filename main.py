@@ -1,22 +1,26 @@
 import json
 import random
 
-def load_questions():
-    """Charge les questions de quiz organisées par catégorie."""
-    questions = {
-        "Histoire": [
-            {"question": "En quelle année a eu lieu le premier pas sur la Lune?", "options": ["1965", "1969", "1972", "1980"], "answer": "1969"},
-            {"question": "Qui a peint La Joconde?", "options": ["Van Gogh", "Picasso", "Léonard de Vinci", "Rembrandt"], "answer": "Léonard de Vinci"}
-        ],
-        "Sciences": [
-            {"question": "Quelle est la plus grande planète du système solaire?", "options": ["Mars", "Terre", "Jupiter", "Saturne"], "answer": "Jupiter"},
-            {"question": "Combien de continents y a-t-il sur Terre?", "options": ["5", "6", "7", "8"], "answer": "7"}
-        ],
-        "Géographie": [
-            {"question": "Quelle est la capitale de la France?", "options": ["Paris", "Londres", "Berlin", "Madrid"], "answer": "Paris"}
-        ]
-    }
-    return questions
+def load_questions_from_file(file_path="questions.json"):
+    """Charge les questions depuis un fichier JSON."""
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            questions = json.load(file)
+            # Validation basique pour vérifier la structure
+            if not isinstance(questions, dict) or not all(
+                isinstance(value, list) for value in questions.values()
+            ):
+                raise ValueError("Le fichier JSON est mal structuré.")
+            return questions
+    except FileNotFoundError:
+        print(f"Erreur : Le fichier {file_path} est introuvable.")
+        exit(1)
+    except json.JSONDecodeError:
+        print(f"Erreur : Le fichier {file_path} contient des erreurs JSON.")
+        exit(1)
+    except ValueError as e:
+        print(f"Erreur : {e}")
+        exit(1)
 
 def choose_category(categories):
     """Affiche un menu pour choisir une catégorie et retourne la catégorie choisie."""
@@ -75,7 +79,9 @@ def main():
     """Exécute le jeu de quiz."""
     print("Bienvenue dans le quiz de culture générale !\n")
     player_name = input("Entrez votre nom : ").strip()
-    questions = load_questions()
+
+    # Charger les questions depuis un fichier JSON
+    questions = load_questions_from_file()
     categories = list(questions.keys())
 
     # Choisir une catégorie

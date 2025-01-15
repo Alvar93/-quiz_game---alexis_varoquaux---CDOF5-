@@ -17,7 +17,8 @@ Bienvenue dans **Quiz Game**, un jeu de questions inspiré de "Questions pour un
 - **Système de score** : enregistrez vos résultats pour suivre vos progrès.
 - **Sauvegarde des scores des joueurs** : chaque score est enregistré dans un fichier texte pour suivre les performances au fil du temps.
 - **Affichage des meilleurs scores** : visualisez les meilleurs résultats des joueurs.
-- **Personnalisation facile** : ajoutez vos propres questions et réponses dans les fichiers JSON.
+- **Questions externalisées** : les questions sont désormais stockées dans un fichier JSON pour une gestion facile et une maintenance simplifiée.
+- **Validation des données** : vérification que le fichier JSON est valide et correctement structuré.
 
 ---
 
