@@ -1,0 +1,33 @@
+{
+    "Histoire": [
+        {
+            "question": "En quelle année a eu lieu le premier pas sur la Lune?",
+            "options": ["1965", "1969", "1972", "1980"],
+            "answer": "1969"
+        },
+        {
+            "question": "Qui a peint La Joconde?",
+            "options": ["Van Gogh", "Picasso", "Léonard de Vinci", "Rembrandt"],
+            "answer": "Léonard de Vinci"
+        }
+    ],
+    "Sciences": [
+        {
+            "question": "Quelle est la plus grande planète du système solaire?",
+            "options": ["Mars", "Terre", "Jupiter", "Saturne"],
+            "answer": "Jupiter"
+        },
+        {
+            "question": "Combien de continents y a-t-il sur Terre?",
+            "options": ["5", "6", "7", "8"],
+            "answer": "7"
+        }
+    ],
+    "Géographie": [
+        {
+            "question": "Quelle est la capitale de la France?",
+            "options": ["Paris", "Londres", "Berlin", "Madrid"],
+            "answer": "Paris"
+        }
+    ]
+}
