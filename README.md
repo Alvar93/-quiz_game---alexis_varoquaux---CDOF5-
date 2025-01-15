@@ -12,12 +12,13 @@ Bienvenue dans **Quiz Game**, un jeu de questions inspiré de "Questions pour un
 **Quiz Game** est un jeu de culture générale développé en Python. Le jeu propose une série de questions avec plusieurs choix possibles. Le joueur doit sélectionner la bonne réponse pour marquer des points. Ce projet a été conçu pour être simple, éducatif et amusant. 
 
 ### Caractéristiques :
+- **Mode chronométré** : répondez à chaque question dans un temps limite (par défaut 10 secondes). Si le temps est écoulé, la réponse est considérée comme incorrecte.
 - **Plusieurs catégories de questions** : histoire, science, géographie, culture générale, etc.
 - **Menu interactif** : choisissez une catégorie avant de commencer le quiz.
 - **Système de score** : enregistrez vos résultats pour suivre vos progrès.
 - **Sauvegarde des scores des joueurs** : chaque score est enregistré dans un fichier texte pour suivre les performances au fil du temps.
 - **Affichage des meilleurs scores** : visualisez les meilleurs résultats des joueurs.
-- **Questions externalisées** : les questions sont désormais stockées dans un fichier JSON pour une gestion facile et une maintenance simplifiée.
+- **Questions externalisées** : les questions sont stockées dans un fichier JSON pour une gestion facile et une maintenance simplifiée.
 - **Validation des données** : vérification que le fichier JSON est valide et correctement structuré.
 
 ---

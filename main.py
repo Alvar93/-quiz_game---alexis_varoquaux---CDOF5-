@@ -1,5 +1,6 @@
 import json
 import random
+import threading
 
 def load_questions_from_file(file_path="questions.json"):
     """Charge les questions depuis un fichier JSON."""
@@ -38,23 +39,42 @@ def choose_category(categories):
         except ValueError:
             print("Veuillez entrer un nombre valide.")
 
-def ask_question(question_data):
-    """Pose une question et retourne si la réponse est correcte."""
+def ask_question_with_timer(question_data, time_limit=10):
+    """Pose une question avec une limite de temps pour répondre."""
     print("\n" + question_data["question"])
     for i, option in enumerate(question_data["options"], start=1):
         print(f"{i}. {option}")
 
-    while True:
+    # Variable pour stocker la réponse
+    answer = [None]
+
+    # Fonction pour gérer le timer
+    def timeout():
+        if answer[0] is None:
+            print("\n⏳ Temps écoulé ! La question est considérée comme incorrecte.")
+
+    # Définir un timer
+    timer = threading.Timer(time_limit, timeout)
+    timer.start()
+
+    while answer[0] is None:
         try:
-            choice = int(input("Votre réponse (1-4) : "))
-            if 1 <= choice <= 4:
+            choice = input(f"Votre réponse (1-{len(question_data['options'])}) : ")
+            if choice.isdigit() and 1 <= int(choice) <= len(question_data["options"]):
+                answer[0] = int(choice)
                 break
             else:
-                print("Veuillez entrer un nombre entre 1 et 4.")
+                print(f"Veuillez entrer un nombre entre 1 et {len(question_data['options'])}.")
         except ValueError:
             print("Veuillez entrer un nombre valide.")
 
-    return question_data["options"][choice - 1] == question_data["answer"]
+    # Annuler le timer si une réponse est donnée à temps
+    timer.cancel()
+
+    if answer[0] is None:
+        return False  # Considérer la réponse comme incorrecte si le temps est écoulé
+
+    return question_data["options"][answer[0] - 1] == question_data["answer"]
 
 def save_score(player_name, category, score, total):
     """Enregistre le score du joueur dans un fichier scores.txt."""
@@ -94,7 +114,7 @@ def main():
 
     score = 0
     for question_data in selected_questions:
-        if ask_question(question_data):
+        if ask_question_with_timer(question_data):
             print("Bonne réponse !")
             score += 1
         else:
